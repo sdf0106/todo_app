@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../../../config/theme/text_styles.dart';
+import '../../../../core/utils/todo_type.dart';
 import '../widgets/type_container.dart';
-
 
 class TaskScreen extends StatelessWidget {
   const TaskScreen({Key? key}) : super(key: key);
@@ -23,7 +23,15 @@ class TaskScreen extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 30.0),
-            const TypeContainer(),
+            Wrap(
+              children: [
+                for (var i in TodoType.values)
+                  TypeContainer(
+                    type: i,
+                    index: i.index,
+                  ),
+              ],
+            ),
           ],
         ),
       ),
