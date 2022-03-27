@@ -1,6 +1,4 @@
 import 'package:get_it/get_it.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:todo_app/core/utils/local_db.dart';
 import 'package:todo_app/features/todos/data/datasources/todo_local_data_source.dart';
 import 'package:todo_app/features/todos/data/repositories/todos_repository_impl.dart';
 import 'package:todo_app/features/todos/domain/repositories/todos_repository.dart';
@@ -10,13 +8,14 @@ import 'package:todo_app/features/todos/domain/usecases/change_todo_reminder_sta
 import 'package:todo_app/features/todos/domain/usecases/get_todos_usecase.dart';
 import 'package:todo_app/features/todos/presentation/bloc/todos/todos_bloc.dart';
 
+import 'core/utils/localDb.dart';
+
 final sl = GetIt.instance;
 
 Future<void> initializeDependencies() async {
   //External
-  final sharedPreferences = await LocalDB.initializeDB();
-
-  sl.registerLazySingleton(() => sharedPreferences);
+  final db = LocalDBFunctions.initDB();
+  sl.registerLazySingleton(() => db);
 
   //UseCases
   sl.registerLazySingleton(() => AddTodoUseCase(repository: sl()));
@@ -31,7 +30,7 @@ Future<void> initializeDependencies() async {
 
   //DataSource
   sl.registerLazySingleton<TodoLocalDataSource>(
-    () => TodoLocalDataSourceImpl(sharedPreferences: sharedPreferences),
+    () => TodoLocalDataSourceImpl(db: db),
   );
   //Bloc
   sl.registerFactory(
@@ -40,6 +39,7 @@ Future<void> initializeDependencies() async {
       addTodoUseCase: sl(),
       changeTodoDoneStatusUseCase: sl(),
       changeTodoReminderStatusUseCase: sl(),
+      dataSource: sl(),
     ),
   );
 }

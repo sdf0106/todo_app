@@ -14,7 +14,7 @@ class TodosRepositoryImpl implements TodosRepository {
   });
 
   @override
-  Future<Either<IntFailure, List<Todo>>> getTodos() async {
+  Future<List<Todo>> getTodos() async {
     return await _getTodos();
   }
 
@@ -43,6 +43,7 @@ class TodosRepositoryImpl implements TodosRepository {
     try {
       final todos = dataSource.getTodos();
       Right(todos);
+      return todos;
     } on CacheExeption {
       return Left(StorageFailure());
     }

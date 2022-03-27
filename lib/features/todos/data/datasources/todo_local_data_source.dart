@@ -1,19 +1,14 @@
-import 'dart:convert';
-
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:todo_app/core/utils/localDb.dart';
+import 'package:todo_app/core/utils/local_db.dart';
 
 import '../../../../core/errors/exceptions.dart';
-import '../../../../core/utils/constants.dart';
-import '../../../../core/utils/local_db.dart';
-import '../../../../core/utils/todo_type.dart';
 import '../../domain/entities/todo.dart';
 import '../models/todo_model.dart';
-import '../models/todo_response_model.dart';
 
 abstract class TodoLocalDataSource {
   Future<void> addTodo({required TodoModel todo});
 
-  Future<TodoResponseModel> getTodos();
+  Future<List<TodoModel>> getTodos();
 
   Future<void> changeTodoDoneStatus({
     required String id,
@@ -29,17 +24,21 @@ abstract class TodoLocalDataSource {
 }
 
 class TodoLocalDataSourceImpl implements TodoLocalDataSource {
-  final SharedPreferences sharedPreferences;
+  final LocalDB db;
 
-  TodoLocalDataSourceImpl({required this.sharedPreferences});
+  TodoLocalDataSourceImpl({required this.db});
 
   @override
-  Future<TodoResponseModel> getTodos() async {
+  Future<List<TodoModel>> getTodos() async {
     try {
-      final List<TodoModel> todosUnparsed =
-          await LocalDB.getListOfTodos(sharedPreferences);
+      final List<Todo> list = await LocalDBFunctions.getListOfTodos(db);
+      print(list);
+      List<TodoModel> todosUnparsed = [];
+      for (var i in list) {
+        todosUnparsed.add(TodoModel.returnObj(i));
+      }
       print(todosUnparsed);
-      return Future.value(TodoResponseModel(todos: todosUnparsed));
+      return todosUnparsed;
     } catch (error) {
       print(error);
       throw CacheExeption();
@@ -49,13 +48,9 @@ class TodoLocalDataSourceImpl implements TodoLocalDataSource {
   @override
   Future<void> addTodo({required TodoModel todo}) async {
     try {
-      final List<TodoModel> todosUnparsed =
-          await LocalDB.getListOfTodos(sharedPreferences);
+      final List<TodoModel> todosUnparsed = await getTodos();
       todosUnparsed.add(todo);
-      LocalDB.cacheListOfTodos(
-        sharedPreferences: sharedPreferences,
-        list: todosUnparsed.map((e) => jsonEncode(e)).toList(),
-      );
+      print(todosUnparsed);
     } catch (error) {
       throw CacheExeption();
     }
@@ -67,15 +62,11 @@ class TodoLocalDataSourceImpl implements TodoLocalDataSource {
     required bool status,
   }) async {
     try {
-      final List<TodoModel> todosUnparsed =
-          await LocalDB.getListOfTodos(sharedPreferences);
+      final List<TodoModel> todosUnparsed = await getTodos();
       int index = todosUnparsed.indexWhere((element) => element.id == id);
       todosUnparsed[index].copyWith(isDone: !todosUnparsed[index].isDone);
       // todosUnparsed[index].isDone = !todosUnparsed[index].isDone;
-      LocalDB.cacheListOfTodos(
-        sharedPreferences: sharedPreferences,
-        list: todosUnparsed.map((e) => jsonEncode(e)).toList(),
-      );
+
     } catch (error) {
       throw CacheExeption();
     }
@@ -87,16 +78,12 @@ class TodoLocalDataSourceImpl implements TodoLocalDataSource {
     required bool status,
   }) async {
     try {
-      final List<TodoModel> todosUnparsed =
-          await LocalDB.getListOfTodos(sharedPreferences);
+      final List<TodoModel> todosUnparsed = await getTodos();
       int index = todosUnparsed.indexWhere((element) => element.id == id);
       todosUnparsed[index]
           .copyWith(isReminded: !todosUnparsed[index].isReminded);
       // todosUnparsed[index].isReminded = !todosUnparsed[index].isReminded;
-      LocalDB.cacheListOfTodos(
-        sharedPreferences: sharedPreferences,
-        list: todosUnparsed.map((e) => jsonEncode(e)).toList(),
-      );
+
     } catch (error) {
       throw CacheExeption();
     }

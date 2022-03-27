@@ -6,6 +6,7 @@ import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:todo_app/core/utils/constants.dart';
+import 'package:todo_app/features/todos/data/datasources/todo_local_data_source.dart';
 import 'package:todo_app/features/todos/domain/usecases/add_todo_usecase.dart'
     as add;
 import 'package:todo_app/features/todos/domain/usecases/change_todo_done_status_usecase.dart'
@@ -23,6 +24,7 @@ part 'todos_event.dart';
 part 'todos_state.dart';
 
 class TodosBloc extends Bloc<TodosEvent, TodosState> {
+  final TodoLocalDataSource dataSource;
   final GetTodosUseCase getTodos;
   final add.AddTodoUseCase addTodoUseCase;
   final changeDoneStatus.ChangeTodoDoneStatusUseCase
@@ -35,6 +37,7 @@ class TodosBloc extends Bloc<TodosEvent, TodosState> {
     required this.addTodoUseCase,
     required this.changeTodoDoneStatusUseCase,
     required this.changeTodoReminderStatusUseCase,
+    required this.dataSource,
   }) : super(const _Initial()) {
     on<_AddTask>(_addTask);
     on<_GetAllTasks>(_getTasks);
@@ -46,8 +49,11 @@ class TodosBloc extends Bloc<TodosEvent, TodosState> {
     try {
       emit(const TodosState.loading());
       final failureOrTasks = await getTodos(NoParams());
-      final fT = _eitherTasksOrFailure(failureOrTasks);
-      emit(fT);
+      // final fT = _eitherTasksOrFailure(failureOrTasks);
+      // final data = await dataSource.getTodos();
+      emit(
+        TodosState.loaded(tasks: failureOrTasks , message: 'Tasks Loaded'),
+      );
     } catch (e) {
       emit(const TodosState.emptyList());
     }
@@ -88,20 +94,20 @@ class TodosBloc extends Bloc<TodosEvent, TodosState> {
     emit(const TodosState.taskStatusChanged(message: 'Done Status Changed'));
   }
 
-  TodosState _eitherTasksOrFailure(
-      Either<IntFailure, List<Todo>> failureOrTasks) {
-    return failureOrTasks.fold(
-      (IntFailure failure) => TodosState.failure(_mapFailureToString(failure)),
-      (tasks) => TodosState.loaded(tasks: tasks, message: 'Tasks Loaded'),
-    );
-  }
+  // TodosState _eitherTasksOrFailure(
+  //     Either<IntFailure, List<Todo>> failureOrTasks) {
+  //   return failureOrTasks.fold(
+  //     (IntFailure failure) => TodosState.failure(_mapFailureToString(failure)),
+  //     (tasks) => TodosState.loaded(tasks: tasks, message: 'Tasks Loaded'),
+  //   );
+  // }
 
-  String _mapFailureToString(IntFailure failure) {
-    switch (failure.runtimeType) {
-      case StorageFailure:
-        return 'Storage_Failure'.toUpperCase();
-      default:
-        return 'Unexpected error';
-    }
-  }
+  // String _mapFailureToString(IntFailure failure) {
+  //   switch (failure.runtimeType) {
+  //     case StorageFailure:
+  //       return 'Storage_Failure'.toUpperCase();
+  //     default:
+  //       return 'Unexpected error';
+  //   }
+  // }
 }

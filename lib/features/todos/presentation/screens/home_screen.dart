@@ -1,9 +1,9 @@
+import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:todo_app/config/theme/text_styles.dart';
 import '../../../../config/theme/palette.dart';
-import '../../../../core/utils/todo_type.dart';
 import '../../domain/entities/todo.dart';
 import '../bloc/todos/todos_bloc.dart';
 import '../widgets/task_container.dart';
@@ -24,7 +24,11 @@ class HomeScreen extends StatelessWidget {
                 loading: () {},
                 loaded: (List<Todo> tasks, String message) {},
                 taskAdded: (String message) {
-                  context.read<TodosBloc>().add(const TodosEvent.getAllTasks());
+                  if (message == 'Task Added') {
+                    context
+                        .read<TodosBloc>()
+                        .add(const TodosEvent.getAllTasks());
+                  }
                 },
                 taskStatusChanged: (String message) {},
                 failure: (String message) {},
