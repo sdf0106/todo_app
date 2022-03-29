@@ -8,7 +8,7 @@ import 'package:todo_app/features/todos/domain/usecases/change_todo_reminder_sta
 import 'package:todo_app/features/todos/domain/usecases/get_todos_usecase.dart';
 import 'package:todo_app/features/todos/presentation/bloc/todos/todos_bloc.dart';
 
-import 'core/utils/localDb.dart';
+import 'core/utils/local_db_functions.dart';
 
 final sl = GetIt.instance;
 

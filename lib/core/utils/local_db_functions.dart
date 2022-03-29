@@ -24,8 +24,4 @@ class LocalDBFunctions {
   static Future<List<Todo>> getListOfTodos(LocalDB db) async {
     return Future.value(db.dataBase);
   }
-
-  static Future<List<TodoModel>> add(List<Todo> db) async {
-    return Future.value(db as List<TodoModel>);
-  }
 }

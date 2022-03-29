@@ -1,4 +1,4 @@
-import 'package:todo_app/core/utils/localDb.dart';
+import 'package:todo_app/core/utils/local_db_functions.dart';
 import 'package:todo_app/core/utils/local_db.dart';
 
 import '../../../../core/errors/exceptions.dart';
@@ -48,9 +48,9 @@ class TodoLocalDataSourceImpl implements TodoLocalDataSource {
   @override
   Future<void> addTodo({required TodoModel todo}) async {
     try {
-      final List<TodoModel> todosUnparsed = await getTodos();
-      todosUnparsed.add(todo);
-      print(todosUnparsed);
+      // final List<TodoModel> todosUnparsed = await getTodos();
+      db.dataBase.add(todo);
+      print("todosUnparsed:${db.dataBase}");
     } catch (error) {
       throw CacheExeption();
     }
@@ -62,11 +62,8 @@ class TodoLocalDataSourceImpl implements TodoLocalDataSource {
     required bool status,
   }) async {
     try {
-      final List<TodoModel> todosUnparsed = await getTodos();
-      int index = todosUnparsed.indexWhere((element) => element.id == id);
-      todosUnparsed[index].copyWith(isDone: !todosUnparsed[index].isDone);
-      // todosUnparsed[index].isDone = !todosUnparsed[index].isDone;
-
+      int index = db.dataBase.indexWhere((element) => element.id == id);
+      db.dataBase[index].copyWith(isDone: !db.dataBase[index].isDone);
     } catch (error) {
       throw CacheExeption();
     }
@@ -78,19 +75,10 @@ class TodoLocalDataSourceImpl implements TodoLocalDataSource {
     required bool status,
   }) async {
     try {
-      final List<TodoModel> todosUnparsed = await getTodos();
-      int index = todosUnparsed.indexWhere((element) => element.id == id);
-      todosUnparsed[index]
-          .copyWith(isReminded: !todosUnparsed[index].isReminded);
-      // todosUnparsed[index].isReminded = !todosUnparsed[index].isReminded;
-
+      int index = db.dataBase.indexWhere((element) => element.id == id);
+      db.dataBase[index].copyWith(isDone: !db.dataBase[index].isReminded);
     } catch (error) {
       throw CacheExeption();
     }
   }
-
-  // @override
-  // Future<void> cacheAllTodos() {
-  //   throw UnimplementedError();
-  // }
 }

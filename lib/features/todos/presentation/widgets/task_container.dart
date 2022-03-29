@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:todo_app/core/helpers/helper_functions.dart';
 import '../../../../config/theme/palette.dart';
 import '../../../../config/theme/text_styles.dart';
 import '../../../../core/utils/todo_type.dart';
+import '../bloc/todos/todos_bloc.dart';
 
 class TaskContainer extends StatelessWidget {
   final DateTime time;
+  final String id;
   bool isDone = false;
   bool isReminded = false;
   String task;
@@ -14,6 +18,7 @@ class TaskContainer extends StatelessWidget {
     Key? key,
     required this.time,
     required this.isDone,
+    required this.id,
     required this.isReminded,
     required this.task,
     required this.type,
@@ -41,9 +46,9 @@ class TaskContainer extends StatelessWidget {
           children: [
             Container(
               width: 4.0,
-              decoration: const BoxDecoration(
-                color: Palette.green,
-                borderRadius: BorderRadius.only(
+              decoration: BoxDecoration(
+                color: HelperFunctions.typeColor(type),
+                borderRadius: const BorderRadius.only(
                   topLeft: Radius.circular(5.0),
                   bottomLeft: Radius.circular(5.0),
                 ),
@@ -71,7 +76,15 @@ class TaskContainer extends StatelessWidget {
                           ) {
                             return InkWell(
                               onTap: () => setState(
-                                () => isDone = !isDone,
+                                () {
+                                  isDone = !isDone;
+                                  context.read<TodosBloc>().add(
+                                        TodosEvent.taskIsDone(
+                                          id: id,
+                                          status: isDone,
+                                        ),
+                                      );
+                                },
                               ),
                               child: isDone == true
                                   ? SvgPicture.asset(

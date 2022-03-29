@@ -41,6 +41,7 @@ class _ShowModalContentState extends State<ShowModalContent> {
   @override
   Widget build(BuildContext context) {
     return Stack(
+      clipBehavior: Clip.none,
       alignment: AlignmentDirectional.topCenter,
       children: [
         Container(
@@ -194,7 +195,7 @@ class _ShowModalContentState extends State<ShowModalContent> {
                         ),
                       );
                   Navigator.pop(context);
-                // context.read<TodosBloc>().add(const TodosEvent.getAllTasks());
+                  // context.read<TodosBloc>().add(const TodosEvent.getAllTasks());
                 },
               ),
             ],

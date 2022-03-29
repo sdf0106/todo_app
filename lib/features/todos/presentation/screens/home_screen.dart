@@ -68,6 +68,7 @@ class HomeScreen extends StatelessWidget {
                         isReminded: tasks[index].isReminded,
                         task: tasks[index].description,
                         type: tasks[index].type,
+                        id: tasks[index].id,
                       );
                     },
                     separatorBuilder: (BuildContext context, int index) =>
