@@ -124,7 +124,7 @@ class HomeScreen extends StatelessWidget {
   }
 
   bool _isNewDay(DateTime comparable, DateTime comparator) {
-    if (comparable.day < comparator.day) return true;
+    if (comparable.day < comparator.day || comparable.day > comparator.day) return true;
     return false;
   }
 }
