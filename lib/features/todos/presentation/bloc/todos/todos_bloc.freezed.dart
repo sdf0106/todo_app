@@ -41,6 +41,10 @@ class _$TodosEventTearOff {
       status: status,
     );
   }
+
+  _CloseReminderBox closeReminderBox() {
+    return const _CloseReminderBox();
+  }
 }
 
 /// @nodoc
@@ -54,6 +58,7 @@ mixin _$TodosEvent {
     required TResult Function() getAllTasks,
     required TResult Function(String id, bool status) taskIsDone,
     required TResult Function(String id, bool status) taskIsReminded,
+    required TResult Function() closeReminderBox,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -62,6 +67,7 @@ mixin _$TodosEvent {
     TResult Function()? getAllTasks,
     TResult Function(String id, bool status)? taskIsDone,
     TResult Function(String id, bool status)? taskIsReminded,
+    TResult Function()? closeReminderBox,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -70,6 +76,7 @@ mixin _$TodosEvent {
     TResult Function()? getAllTasks,
     TResult Function(String id, bool status)? taskIsDone,
     TResult Function(String id, bool status)? taskIsReminded,
+    TResult Function()? closeReminderBox,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -79,6 +86,7 @@ mixin _$TodosEvent {
     required TResult Function(_GetAllTasks value) getAllTasks,
     required TResult Function(_TaskIsDone value) taskIsDone,
     required TResult Function(_TaskIsReminded value) taskIsReminded,
+    required TResult Function(_CloseReminderBox value) closeReminderBox,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -87,6 +95,7 @@ mixin _$TodosEvent {
     TResult Function(_GetAllTasks value)? getAllTasks,
     TResult Function(_TaskIsDone value)? taskIsDone,
     TResult Function(_TaskIsReminded value)? taskIsReminded,
+    TResult Function(_CloseReminderBox value)? closeReminderBox,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -95,6 +104,7 @@ mixin _$TodosEvent {
     TResult Function(_GetAllTasks value)? getAllTasks,
     TResult Function(_TaskIsDone value)? taskIsDone,
     TResult Function(_TaskIsReminded value)? taskIsReminded,
+    TResult Function(_CloseReminderBox value)? closeReminderBox,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -190,6 +200,7 @@ class _$_AddTask with DiagnosticableTreeMixin implements _AddTask {
     required TResult Function() getAllTasks,
     required TResult Function(String id, bool status) taskIsDone,
     required TResult Function(String id, bool status) taskIsReminded,
+    required TResult Function() closeReminderBox,
   }) {
     return addTask(todo);
   }
@@ -201,6 +212,7 @@ class _$_AddTask with DiagnosticableTreeMixin implements _AddTask {
     TResult Function()? getAllTasks,
     TResult Function(String id, bool status)? taskIsDone,
     TResult Function(String id, bool status)? taskIsReminded,
+    TResult Function()? closeReminderBox,
   }) {
     return addTask?.call(todo);
   }
@@ -212,6 +224,7 @@ class _$_AddTask with DiagnosticableTreeMixin implements _AddTask {
     TResult Function()? getAllTasks,
     TResult Function(String id, bool status)? taskIsDone,
     TResult Function(String id, bool status)? taskIsReminded,
+    TResult Function()? closeReminderBox,
     required TResult orElse(),
   }) {
     if (addTask != null) {
@@ -227,6 +240,7 @@ class _$_AddTask with DiagnosticableTreeMixin implements _AddTask {
     required TResult Function(_GetAllTasks value) getAllTasks,
     required TResult Function(_TaskIsDone value) taskIsDone,
     required TResult Function(_TaskIsReminded value) taskIsReminded,
+    required TResult Function(_CloseReminderBox value) closeReminderBox,
   }) {
     return addTask(this);
   }
@@ -238,6 +252,7 @@ class _$_AddTask with DiagnosticableTreeMixin implements _AddTask {
     TResult Function(_GetAllTasks value)? getAllTasks,
     TResult Function(_TaskIsDone value)? taskIsDone,
     TResult Function(_TaskIsReminded value)? taskIsReminded,
+    TResult Function(_CloseReminderBox value)? closeReminderBox,
   }) {
     return addTask?.call(this);
   }
@@ -249,6 +264,7 @@ class _$_AddTask with DiagnosticableTreeMixin implements _AddTask {
     TResult Function(_GetAllTasks value)? getAllTasks,
     TResult Function(_TaskIsDone value)? taskIsDone,
     TResult Function(_TaskIsReminded value)? taskIsReminded,
+    TResult Function(_CloseReminderBox value)? closeReminderBox,
     required TResult orElse(),
   }) {
     if (addTask != null) {
@@ -317,6 +333,7 @@ class _$_GetAllTasks with DiagnosticableTreeMixin implements _GetAllTasks {
     required TResult Function() getAllTasks,
     required TResult Function(String id, bool status) taskIsDone,
     required TResult Function(String id, bool status) taskIsReminded,
+    required TResult Function() closeReminderBox,
   }) {
     return getAllTasks();
   }
@@ -328,6 +345,7 @@ class _$_GetAllTasks with DiagnosticableTreeMixin implements _GetAllTasks {
     TResult Function()? getAllTasks,
     TResult Function(String id, bool status)? taskIsDone,
     TResult Function(String id, bool status)? taskIsReminded,
+    TResult Function()? closeReminderBox,
   }) {
     return getAllTasks?.call();
   }
@@ -339,6 +357,7 @@ class _$_GetAllTasks with DiagnosticableTreeMixin implements _GetAllTasks {
     TResult Function()? getAllTasks,
     TResult Function(String id, bool status)? taskIsDone,
     TResult Function(String id, bool status)? taskIsReminded,
+    TResult Function()? closeReminderBox,
     required TResult orElse(),
   }) {
     if (getAllTasks != null) {
@@ -354,6 +373,7 @@ class _$_GetAllTasks with DiagnosticableTreeMixin implements _GetAllTasks {
     required TResult Function(_GetAllTasks value) getAllTasks,
     required TResult Function(_TaskIsDone value) taskIsDone,
     required TResult Function(_TaskIsReminded value) taskIsReminded,
+    required TResult Function(_CloseReminderBox value) closeReminderBox,
   }) {
     return getAllTasks(this);
   }
@@ -365,6 +385,7 @@ class _$_GetAllTasks with DiagnosticableTreeMixin implements _GetAllTasks {
     TResult Function(_GetAllTasks value)? getAllTasks,
     TResult Function(_TaskIsDone value)? taskIsDone,
     TResult Function(_TaskIsReminded value)? taskIsReminded,
+    TResult Function(_CloseReminderBox value)? closeReminderBox,
   }) {
     return getAllTasks?.call(this);
   }
@@ -376,6 +397,7 @@ class _$_GetAllTasks with DiagnosticableTreeMixin implements _GetAllTasks {
     TResult Function(_GetAllTasks value)? getAllTasks,
     TResult Function(_TaskIsDone value)? taskIsDone,
     TResult Function(_TaskIsReminded value)? taskIsReminded,
+    TResult Function(_CloseReminderBox value)? closeReminderBox,
     required TResult orElse(),
   }) {
     if (getAllTasks != null) {
@@ -476,6 +498,7 @@ class _$_TaskIsDone with DiagnosticableTreeMixin implements _TaskIsDone {
     required TResult Function() getAllTasks,
     required TResult Function(String id, bool status) taskIsDone,
     required TResult Function(String id, bool status) taskIsReminded,
+    required TResult Function() closeReminderBox,
   }) {
     return taskIsDone(id, status);
   }
@@ -487,6 +510,7 @@ class _$_TaskIsDone with DiagnosticableTreeMixin implements _TaskIsDone {
     TResult Function()? getAllTasks,
     TResult Function(String id, bool status)? taskIsDone,
     TResult Function(String id, bool status)? taskIsReminded,
+    TResult Function()? closeReminderBox,
   }) {
     return taskIsDone?.call(id, status);
   }
@@ -498,6 +522,7 @@ class _$_TaskIsDone with DiagnosticableTreeMixin implements _TaskIsDone {
     TResult Function()? getAllTasks,
     TResult Function(String id, bool status)? taskIsDone,
     TResult Function(String id, bool status)? taskIsReminded,
+    TResult Function()? closeReminderBox,
     required TResult orElse(),
   }) {
     if (taskIsDone != null) {
@@ -513,6 +538,7 @@ class _$_TaskIsDone with DiagnosticableTreeMixin implements _TaskIsDone {
     required TResult Function(_GetAllTasks value) getAllTasks,
     required TResult Function(_TaskIsDone value) taskIsDone,
     required TResult Function(_TaskIsReminded value) taskIsReminded,
+    required TResult Function(_CloseReminderBox value) closeReminderBox,
   }) {
     return taskIsDone(this);
   }
@@ -524,6 +550,7 @@ class _$_TaskIsDone with DiagnosticableTreeMixin implements _TaskIsDone {
     TResult Function(_GetAllTasks value)? getAllTasks,
     TResult Function(_TaskIsDone value)? taskIsDone,
     TResult Function(_TaskIsReminded value)? taskIsReminded,
+    TResult Function(_CloseReminderBox value)? closeReminderBox,
   }) {
     return taskIsDone?.call(this);
   }
@@ -535,6 +562,7 @@ class _$_TaskIsDone with DiagnosticableTreeMixin implements _TaskIsDone {
     TResult Function(_GetAllTasks value)? getAllTasks,
     TResult Function(_TaskIsDone value)? taskIsDone,
     TResult Function(_TaskIsReminded value)? taskIsReminded,
+    TResult Function(_CloseReminderBox value)? closeReminderBox,
     required TResult orElse(),
   }) {
     if (taskIsDone != null) {
@@ -644,6 +672,7 @@ class _$_TaskIsReminded
     required TResult Function() getAllTasks,
     required TResult Function(String id, bool status) taskIsDone,
     required TResult Function(String id, bool status) taskIsReminded,
+    required TResult Function() closeReminderBox,
   }) {
     return taskIsReminded(id, status);
   }
@@ -655,6 +684,7 @@ class _$_TaskIsReminded
     TResult Function()? getAllTasks,
     TResult Function(String id, bool status)? taskIsDone,
     TResult Function(String id, bool status)? taskIsReminded,
+    TResult Function()? closeReminderBox,
   }) {
     return taskIsReminded?.call(id, status);
   }
@@ -666,6 +696,7 @@ class _$_TaskIsReminded
     TResult Function()? getAllTasks,
     TResult Function(String id, bool status)? taskIsDone,
     TResult Function(String id, bool status)? taskIsReminded,
+    TResult Function()? closeReminderBox,
     required TResult orElse(),
   }) {
     if (taskIsReminded != null) {
@@ -681,6 +712,7 @@ class _$_TaskIsReminded
     required TResult Function(_GetAllTasks value) getAllTasks,
     required TResult Function(_TaskIsDone value) taskIsDone,
     required TResult Function(_TaskIsReminded value) taskIsReminded,
+    required TResult Function(_CloseReminderBox value) closeReminderBox,
   }) {
     return taskIsReminded(this);
   }
@@ -692,6 +724,7 @@ class _$_TaskIsReminded
     TResult Function(_GetAllTasks value)? getAllTasks,
     TResult Function(_TaskIsDone value)? taskIsDone,
     TResult Function(_TaskIsReminded value)? taskIsReminded,
+    TResult Function(_CloseReminderBox value)? closeReminderBox,
   }) {
     return taskIsReminded?.call(this);
   }
@@ -703,6 +736,7 @@ class _$_TaskIsReminded
     TResult Function(_GetAllTasks value)? getAllTasks,
     TResult Function(_TaskIsDone value)? taskIsDone,
     TResult Function(_TaskIsReminded value)? taskIsReminded,
+    TResult Function(_CloseReminderBox value)? closeReminderBox,
     required TResult orElse(),
   }) {
     if (taskIsReminded != null) {
@@ -721,6 +755,137 @@ abstract class _TaskIsReminded implements TodosEvent {
   @JsonKey(ignore: true)
   _$TaskIsRemindedCopyWith<_TaskIsReminded> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$CloseReminderBoxCopyWith<$Res> {
+  factory _$CloseReminderBoxCopyWith(
+          _CloseReminderBox value, $Res Function(_CloseReminderBox) then) =
+      __$CloseReminderBoxCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$CloseReminderBoxCopyWithImpl<$Res>
+    extends _$TodosEventCopyWithImpl<$Res>
+    implements _$CloseReminderBoxCopyWith<$Res> {
+  __$CloseReminderBoxCopyWithImpl(
+      _CloseReminderBox _value, $Res Function(_CloseReminderBox) _then)
+      : super(_value, (v) => _then(v as _CloseReminderBox));
+
+  @override
+  _CloseReminderBox get _value => super._value as _CloseReminderBox;
+}
+
+/// @nodoc
+
+class _$_CloseReminderBox
+    with DiagnosticableTreeMixin
+    implements _CloseReminderBox {
+  const _$_CloseReminderBox();
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'TodosEvent.closeReminderBox()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties..add(DiagnosticsProperty('type', 'TodosEvent.closeReminderBox'));
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _CloseReminderBox);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(Todo todo) addTask,
+    required TResult Function() getAllTasks,
+    required TResult Function(String id, bool status) taskIsDone,
+    required TResult Function(String id, bool status) taskIsReminded,
+    required TResult Function() closeReminderBox,
+  }) {
+    return closeReminderBox();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function(Todo todo)? addTask,
+    TResult Function()? getAllTasks,
+    TResult Function(String id, bool status)? taskIsDone,
+    TResult Function(String id, bool status)? taskIsReminded,
+    TResult Function()? closeReminderBox,
+  }) {
+    return closeReminderBox?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(Todo todo)? addTask,
+    TResult Function()? getAllTasks,
+    TResult Function(String id, bool status)? taskIsDone,
+    TResult Function(String id, bool status)? taskIsReminded,
+    TResult Function()? closeReminderBox,
+    required TResult orElse(),
+  }) {
+    if (closeReminderBox != null) {
+      return closeReminderBox();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_AddTask value) addTask,
+    required TResult Function(_GetAllTasks value) getAllTasks,
+    required TResult Function(_TaskIsDone value) taskIsDone,
+    required TResult Function(_TaskIsReminded value) taskIsReminded,
+    required TResult Function(_CloseReminderBox value) closeReminderBox,
+  }) {
+    return closeReminderBox(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_AddTask value)? addTask,
+    TResult Function(_GetAllTasks value)? getAllTasks,
+    TResult Function(_TaskIsDone value)? taskIsDone,
+    TResult Function(_TaskIsReminded value)? taskIsReminded,
+    TResult Function(_CloseReminderBox value)? closeReminderBox,
+  }) {
+    return closeReminderBox?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_AddTask value)? addTask,
+    TResult Function(_GetAllTasks value)? getAllTasks,
+    TResult Function(_TaskIsDone value)? taskIsDone,
+    TResult Function(_TaskIsReminded value)? taskIsReminded,
+    TResult Function(_CloseReminderBox value)? closeReminderBox,
+    required TResult orElse(),
+  }) {
+    if (closeReminderBox != null) {
+      return closeReminderBox(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _CloseReminderBox implements TodosEvent {
+  const factory _CloseReminderBox() = _$_CloseReminderBox;
 }
 
 /// @nodoc
@@ -763,6 +928,10 @@ class _$TodosStateTearOff {
   EmptyList emptyList() {
     return const EmptyList();
   }
+
+  CloseReminderBox closeReminderBox() {
+    return const CloseReminderBox();
+  }
 }
 
 /// @nodoc
@@ -779,6 +948,7 @@ mixin _$TodosState {
     required TResult Function(String message) taskStatusChanged,
     required TResult Function(String error) failure,
     required TResult Function() emptyList,
+    required TResult Function() closeReminderBox,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -790,6 +960,7 @@ mixin _$TodosState {
     TResult Function(String message)? taskStatusChanged,
     TResult Function(String error)? failure,
     TResult Function()? emptyList,
+    TResult Function()? closeReminderBox,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -801,6 +972,7 @@ mixin _$TodosState {
     TResult Function(String message)? taskStatusChanged,
     TResult Function(String error)? failure,
     TResult Function()? emptyList,
+    TResult Function()? closeReminderBox,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -813,6 +985,7 @@ mixin _$TodosState {
     required TResult Function(TaskStatusChanged value) taskStatusChanged,
     required TResult Function(Failure value) failure,
     required TResult Function(EmptyList value) emptyList,
+    required TResult Function(CloseReminderBox value) closeReminderBox,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -824,6 +997,7 @@ mixin _$TodosState {
     TResult Function(TaskStatusChanged value)? taskStatusChanged,
     TResult Function(Failure value)? failure,
     TResult Function(EmptyList value)? emptyList,
+    TResult Function(CloseReminderBox value)? closeReminderBox,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -835,6 +1009,7 @@ mixin _$TodosState {
     TResult Function(TaskStatusChanged value)? taskStatusChanged,
     TResult Function(Failure value)? failure,
     TResult Function(EmptyList value)? emptyList,
+    TResult Function(CloseReminderBox value)? closeReminderBox,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -907,6 +1082,7 @@ class _$_Initial with DiagnosticableTreeMixin implements _Initial {
     required TResult Function(String message) taskStatusChanged,
     required TResult Function(String error) failure,
     required TResult Function() emptyList,
+    required TResult Function() closeReminderBox,
   }) {
     return initial();
   }
@@ -921,6 +1097,7 @@ class _$_Initial with DiagnosticableTreeMixin implements _Initial {
     TResult Function(String message)? taskStatusChanged,
     TResult Function(String error)? failure,
     TResult Function()? emptyList,
+    TResult Function()? closeReminderBox,
   }) {
     return initial?.call();
   }
@@ -935,6 +1112,7 @@ class _$_Initial with DiagnosticableTreeMixin implements _Initial {
     TResult Function(String message)? taskStatusChanged,
     TResult Function(String error)? failure,
     TResult Function()? emptyList,
+    TResult Function()? closeReminderBox,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -953,6 +1131,7 @@ class _$_Initial with DiagnosticableTreeMixin implements _Initial {
     required TResult Function(TaskStatusChanged value) taskStatusChanged,
     required TResult Function(Failure value) failure,
     required TResult Function(EmptyList value) emptyList,
+    required TResult Function(CloseReminderBox value) closeReminderBox,
   }) {
     return initial(this);
   }
@@ -967,6 +1146,7 @@ class _$_Initial with DiagnosticableTreeMixin implements _Initial {
     TResult Function(TaskStatusChanged value)? taskStatusChanged,
     TResult Function(Failure value)? failure,
     TResult Function(EmptyList value)? emptyList,
+    TResult Function(CloseReminderBox value)? closeReminderBox,
   }) {
     return initial?.call(this);
   }
@@ -981,6 +1161,7 @@ class _$_Initial with DiagnosticableTreeMixin implements _Initial {
     TResult Function(TaskStatusChanged value)? taskStatusChanged,
     TResult Function(Failure value)? failure,
     TResult Function(EmptyList value)? emptyList,
+    TResult Function(CloseReminderBox value)? closeReminderBox,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -1045,6 +1226,7 @@ class _$Loading with DiagnosticableTreeMixin implements Loading {
     required TResult Function(String message) taskStatusChanged,
     required TResult Function(String error) failure,
     required TResult Function() emptyList,
+    required TResult Function() closeReminderBox,
   }) {
     return loading();
   }
@@ -1059,6 +1241,7 @@ class _$Loading with DiagnosticableTreeMixin implements Loading {
     TResult Function(String message)? taskStatusChanged,
     TResult Function(String error)? failure,
     TResult Function()? emptyList,
+    TResult Function()? closeReminderBox,
   }) {
     return loading?.call();
   }
@@ -1073,6 +1256,7 @@ class _$Loading with DiagnosticableTreeMixin implements Loading {
     TResult Function(String message)? taskStatusChanged,
     TResult Function(String error)? failure,
     TResult Function()? emptyList,
+    TResult Function()? closeReminderBox,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -1091,6 +1275,7 @@ class _$Loading with DiagnosticableTreeMixin implements Loading {
     required TResult Function(TaskStatusChanged value) taskStatusChanged,
     required TResult Function(Failure value) failure,
     required TResult Function(EmptyList value) emptyList,
+    required TResult Function(CloseReminderBox value) closeReminderBox,
   }) {
     return loading(this);
   }
@@ -1105,6 +1290,7 @@ class _$Loading with DiagnosticableTreeMixin implements Loading {
     TResult Function(TaskStatusChanged value)? taskStatusChanged,
     TResult Function(Failure value)? failure,
     TResult Function(EmptyList value)? emptyList,
+    TResult Function(CloseReminderBox value)? closeReminderBox,
   }) {
     return loading?.call(this);
   }
@@ -1119,6 +1305,7 @@ class _$Loading with DiagnosticableTreeMixin implements Loading {
     TResult Function(TaskStatusChanged value)? taskStatusChanged,
     TResult Function(Failure value)? failure,
     TResult Function(EmptyList value)? emptyList,
+    TResult Function(CloseReminderBox value)? closeReminderBox,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -1220,6 +1407,7 @@ class _$Loaded with DiagnosticableTreeMixin implements Loaded {
     required TResult Function(String message) taskStatusChanged,
     required TResult Function(String error) failure,
     required TResult Function() emptyList,
+    required TResult Function() closeReminderBox,
   }) {
     return loaded(tasks, message);
   }
@@ -1234,6 +1422,7 @@ class _$Loaded with DiagnosticableTreeMixin implements Loaded {
     TResult Function(String message)? taskStatusChanged,
     TResult Function(String error)? failure,
     TResult Function()? emptyList,
+    TResult Function()? closeReminderBox,
   }) {
     return loaded?.call(tasks, message);
   }
@@ -1248,6 +1437,7 @@ class _$Loaded with DiagnosticableTreeMixin implements Loaded {
     TResult Function(String message)? taskStatusChanged,
     TResult Function(String error)? failure,
     TResult Function()? emptyList,
+    TResult Function()? closeReminderBox,
     required TResult orElse(),
   }) {
     if (loaded != null) {
@@ -1266,6 +1456,7 @@ class _$Loaded with DiagnosticableTreeMixin implements Loaded {
     required TResult Function(TaskStatusChanged value) taskStatusChanged,
     required TResult Function(Failure value) failure,
     required TResult Function(EmptyList value) emptyList,
+    required TResult Function(CloseReminderBox value) closeReminderBox,
   }) {
     return loaded(this);
   }
@@ -1280,6 +1471,7 @@ class _$Loaded with DiagnosticableTreeMixin implements Loaded {
     TResult Function(TaskStatusChanged value)? taskStatusChanged,
     TResult Function(Failure value)? failure,
     TResult Function(EmptyList value)? emptyList,
+    TResult Function(CloseReminderBox value)? closeReminderBox,
   }) {
     return loaded?.call(this);
   }
@@ -1294,6 +1486,7 @@ class _$Loaded with DiagnosticableTreeMixin implements Loaded {
     TResult Function(TaskStatusChanged value)? taskStatusChanged,
     TResult Function(Failure value)? failure,
     TResult Function(EmptyList value)? emptyList,
+    TResult Function(CloseReminderBox value)? closeReminderBox,
     required TResult orElse(),
   }) {
     if (loaded != null) {
@@ -1390,6 +1583,7 @@ class _$TaskAdded with DiagnosticableTreeMixin implements TaskAdded {
     required TResult Function(String message) taskStatusChanged,
     required TResult Function(String error) failure,
     required TResult Function() emptyList,
+    required TResult Function() closeReminderBox,
   }) {
     return taskAdded(message);
   }
@@ -1404,6 +1598,7 @@ class _$TaskAdded with DiagnosticableTreeMixin implements TaskAdded {
     TResult Function(String message)? taskStatusChanged,
     TResult Function(String error)? failure,
     TResult Function()? emptyList,
+    TResult Function()? closeReminderBox,
   }) {
     return taskAdded?.call(message);
   }
@@ -1418,6 +1613,7 @@ class _$TaskAdded with DiagnosticableTreeMixin implements TaskAdded {
     TResult Function(String message)? taskStatusChanged,
     TResult Function(String error)? failure,
     TResult Function()? emptyList,
+    TResult Function()? closeReminderBox,
     required TResult orElse(),
   }) {
     if (taskAdded != null) {
@@ -1436,6 +1632,7 @@ class _$TaskAdded with DiagnosticableTreeMixin implements TaskAdded {
     required TResult Function(TaskStatusChanged value) taskStatusChanged,
     required TResult Function(Failure value) failure,
     required TResult Function(EmptyList value) emptyList,
+    required TResult Function(CloseReminderBox value) closeReminderBox,
   }) {
     return taskAdded(this);
   }
@@ -1450,6 +1647,7 @@ class _$TaskAdded with DiagnosticableTreeMixin implements TaskAdded {
     TResult Function(TaskStatusChanged value)? taskStatusChanged,
     TResult Function(Failure value)? failure,
     TResult Function(EmptyList value)? emptyList,
+    TResult Function(CloseReminderBox value)? closeReminderBox,
   }) {
     return taskAdded?.call(this);
   }
@@ -1464,6 +1662,7 @@ class _$TaskAdded with DiagnosticableTreeMixin implements TaskAdded {
     TResult Function(TaskStatusChanged value)? taskStatusChanged,
     TResult Function(Failure value)? failure,
     TResult Function(EmptyList value)? emptyList,
+    TResult Function(CloseReminderBox value)? closeReminderBox,
     required TResult orElse(),
   }) {
     if (taskAdded != null) {
@@ -1564,6 +1763,7 @@ class _$TaskStatusChanged
     required TResult Function(String message) taskStatusChanged,
     required TResult Function(String error) failure,
     required TResult Function() emptyList,
+    required TResult Function() closeReminderBox,
   }) {
     return taskStatusChanged(message);
   }
@@ -1578,6 +1778,7 @@ class _$TaskStatusChanged
     TResult Function(String message)? taskStatusChanged,
     TResult Function(String error)? failure,
     TResult Function()? emptyList,
+    TResult Function()? closeReminderBox,
   }) {
     return taskStatusChanged?.call(message);
   }
@@ -1592,6 +1793,7 @@ class _$TaskStatusChanged
     TResult Function(String message)? taskStatusChanged,
     TResult Function(String error)? failure,
     TResult Function()? emptyList,
+    TResult Function()? closeReminderBox,
     required TResult orElse(),
   }) {
     if (taskStatusChanged != null) {
@@ -1610,6 +1812,7 @@ class _$TaskStatusChanged
     required TResult Function(TaskStatusChanged value) taskStatusChanged,
     required TResult Function(Failure value) failure,
     required TResult Function(EmptyList value) emptyList,
+    required TResult Function(CloseReminderBox value) closeReminderBox,
   }) {
     return taskStatusChanged(this);
   }
@@ -1624,6 +1827,7 @@ class _$TaskStatusChanged
     TResult Function(TaskStatusChanged value)? taskStatusChanged,
     TResult Function(Failure value)? failure,
     TResult Function(EmptyList value)? emptyList,
+    TResult Function(CloseReminderBox value)? closeReminderBox,
   }) {
     return taskStatusChanged?.call(this);
   }
@@ -1638,6 +1842,7 @@ class _$TaskStatusChanged
     TResult Function(TaskStatusChanged value)? taskStatusChanged,
     TResult Function(Failure value)? failure,
     TResult Function(EmptyList value)? emptyList,
+    TResult Function(CloseReminderBox value)? closeReminderBox,
     required TResult orElse(),
   }) {
     if (taskStatusChanged != null) {
@@ -1734,6 +1939,7 @@ class _$Failure with DiagnosticableTreeMixin implements Failure {
     required TResult Function(String message) taskStatusChanged,
     required TResult Function(String error) failure,
     required TResult Function() emptyList,
+    required TResult Function() closeReminderBox,
   }) {
     return failure(error);
   }
@@ -1748,6 +1954,7 @@ class _$Failure with DiagnosticableTreeMixin implements Failure {
     TResult Function(String message)? taskStatusChanged,
     TResult Function(String error)? failure,
     TResult Function()? emptyList,
+    TResult Function()? closeReminderBox,
   }) {
     return failure?.call(error);
   }
@@ -1762,6 +1969,7 @@ class _$Failure with DiagnosticableTreeMixin implements Failure {
     TResult Function(String message)? taskStatusChanged,
     TResult Function(String error)? failure,
     TResult Function()? emptyList,
+    TResult Function()? closeReminderBox,
     required TResult orElse(),
   }) {
     if (failure != null) {
@@ -1780,6 +1988,7 @@ class _$Failure with DiagnosticableTreeMixin implements Failure {
     required TResult Function(TaskStatusChanged value) taskStatusChanged,
     required TResult Function(Failure value) failure,
     required TResult Function(EmptyList value) emptyList,
+    required TResult Function(CloseReminderBox value) closeReminderBox,
   }) {
     return failure(this);
   }
@@ -1794,6 +2003,7 @@ class _$Failure with DiagnosticableTreeMixin implements Failure {
     TResult Function(TaskStatusChanged value)? taskStatusChanged,
     TResult Function(Failure value)? failure,
     TResult Function(EmptyList value)? emptyList,
+    TResult Function(CloseReminderBox value)? closeReminderBox,
   }) {
     return failure?.call(this);
   }
@@ -1808,6 +2018,7 @@ class _$Failure with DiagnosticableTreeMixin implements Failure {
     TResult Function(TaskStatusChanged value)? taskStatusChanged,
     TResult Function(Failure value)? failure,
     TResult Function(EmptyList value)? emptyList,
+    TResult Function(CloseReminderBox value)? closeReminderBox,
     required TResult orElse(),
   }) {
     if (failure != null) {
@@ -1876,6 +2087,7 @@ class _$EmptyList with DiagnosticableTreeMixin implements EmptyList {
     required TResult Function(String message) taskStatusChanged,
     required TResult Function(String error) failure,
     required TResult Function() emptyList,
+    required TResult Function() closeReminderBox,
   }) {
     return emptyList();
   }
@@ -1890,6 +2102,7 @@ class _$EmptyList with DiagnosticableTreeMixin implements EmptyList {
     TResult Function(String message)? taskStatusChanged,
     TResult Function(String error)? failure,
     TResult Function()? emptyList,
+    TResult Function()? closeReminderBox,
   }) {
     return emptyList?.call();
   }
@@ -1904,6 +2117,7 @@ class _$EmptyList with DiagnosticableTreeMixin implements EmptyList {
     TResult Function(String message)? taskStatusChanged,
     TResult Function(String error)? failure,
     TResult Function()? emptyList,
+    TResult Function()? closeReminderBox,
     required TResult orElse(),
   }) {
     if (emptyList != null) {
@@ -1922,6 +2136,7 @@ class _$EmptyList with DiagnosticableTreeMixin implements EmptyList {
     required TResult Function(TaskStatusChanged value) taskStatusChanged,
     required TResult Function(Failure value) failure,
     required TResult Function(EmptyList value) emptyList,
+    required TResult Function(CloseReminderBox value) closeReminderBox,
   }) {
     return emptyList(this);
   }
@@ -1936,6 +2151,7 @@ class _$EmptyList with DiagnosticableTreeMixin implements EmptyList {
     TResult Function(TaskStatusChanged value)? taskStatusChanged,
     TResult Function(Failure value)? failure,
     TResult Function(EmptyList value)? emptyList,
+    TResult Function(CloseReminderBox value)? closeReminderBox,
   }) {
     return emptyList?.call(this);
   }
@@ -1950,6 +2166,7 @@ class _$EmptyList with DiagnosticableTreeMixin implements EmptyList {
     TResult Function(TaskStatusChanged value)? taskStatusChanged,
     TResult Function(Failure value)? failure,
     TResult Function(EmptyList value)? emptyList,
+    TResult Function(CloseReminderBox value)? closeReminderBox,
     required TResult orElse(),
   }) {
     if (emptyList != null) {
@@ -1961,4 +2178,153 @@ class _$EmptyList with DiagnosticableTreeMixin implements EmptyList {
 
 abstract class EmptyList implements TodosState {
   const factory EmptyList() = _$EmptyList;
+}
+
+/// @nodoc
+abstract class $CloseReminderBoxCopyWith<$Res> {
+  factory $CloseReminderBoxCopyWith(
+          CloseReminderBox value, $Res Function(CloseReminderBox) then) =
+      _$CloseReminderBoxCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class _$CloseReminderBoxCopyWithImpl<$Res>
+    extends _$TodosStateCopyWithImpl<$Res>
+    implements $CloseReminderBoxCopyWith<$Res> {
+  _$CloseReminderBoxCopyWithImpl(
+      CloseReminderBox _value, $Res Function(CloseReminderBox) _then)
+      : super(_value, (v) => _then(v as CloseReminderBox));
+
+  @override
+  CloseReminderBox get _value => super._value as CloseReminderBox;
+}
+
+/// @nodoc
+
+class _$CloseReminderBox
+    with DiagnosticableTreeMixin
+    implements CloseReminderBox {
+  const _$CloseReminderBox();
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'TodosState.closeReminderBox()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties..add(DiagnosticsProperty('type', 'TodosState.closeReminderBox'));
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is CloseReminderBox);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(List<Todo> tasks, String message) loaded,
+    required TResult Function(String message) taskAdded,
+    required TResult Function(String message) taskStatusChanged,
+    required TResult Function(String error) failure,
+    required TResult Function() emptyList,
+    required TResult Function() closeReminderBox,
+  }) {
+    return closeReminderBox();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(List<Todo> tasks, String message)? loaded,
+    TResult Function(String message)? taskAdded,
+    TResult Function(String message)? taskStatusChanged,
+    TResult Function(String error)? failure,
+    TResult Function()? emptyList,
+    TResult Function()? closeReminderBox,
+  }) {
+    return closeReminderBox?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(List<Todo> tasks, String message)? loaded,
+    TResult Function(String message)? taskAdded,
+    TResult Function(String message)? taskStatusChanged,
+    TResult Function(String error)? failure,
+    TResult Function()? emptyList,
+    TResult Function()? closeReminderBox,
+    required TResult orElse(),
+  }) {
+    if (closeReminderBox != null) {
+      return closeReminderBox();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(Loading value) loading,
+    required TResult Function(Loaded value) loaded,
+    required TResult Function(TaskAdded value) taskAdded,
+    required TResult Function(TaskStatusChanged value) taskStatusChanged,
+    required TResult Function(Failure value) failure,
+    required TResult Function(EmptyList value) emptyList,
+    required TResult Function(CloseReminderBox value) closeReminderBox,
+  }) {
+    return closeReminderBox(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(Loading value)? loading,
+    TResult Function(Loaded value)? loaded,
+    TResult Function(TaskAdded value)? taskAdded,
+    TResult Function(TaskStatusChanged value)? taskStatusChanged,
+    TResult Function(Failure value)? failure,
+    TResult Function(EmptyList value)? emptyList,
+    TResult Function(CloseReminderBox value)? closeReminderBox,
+  }) {
+    return closeReminderBox?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(Loading value)? loading,
+    TResult Function(Loaded value)? loaded,
+    TResult Function(TaskAdded value)? taskAdded,
+    TResult Function(TaskStatusChanged value)? taskStatusChanged,
+    TResult Function(Failure value)? failure,
+    TResult Function(EmptyList value)? emptyList,
+    TResult Function(CloseReminderBox value)? closeReminderBox,
+    required TResult orElse(),
+  }) {
+    if (closeReminderBox != null) {
+      return closeReminderBox(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class CloseReminderBox implements TodosState {
+  const factory CloseReminderBox() = _$CloseReminderBox;
 }

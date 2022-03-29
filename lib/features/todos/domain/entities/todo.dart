@@ -1,5 +1,4 @@
 import 'package:equatable/equatable.dart';
-import 'package:todo_app/features/todos/data/models/todo_model.dart';
 
 import '../../../../core/utils/todo_type.dart';
 
@@ -7,11 +6,11 @@ class Todo extends Equatable {
   final String id;
   final String description;
   final TodoType type;
-  final bool isDone;
-  final bool isReminded;
+  bool isDone;
+  bool isReminded;
   final DateTime startTime;
   final DateTime endTime;
-  const Todo({
+  Todo({
     required this.type,
     required this.id,
     required this.description,

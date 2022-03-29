@@ -7,7 +7,7 @@ part 'todo_model.g.dart';
 
 @JsonSerializable()
 class TodoModel extends Todo {
-  const TodoModel({
+  TodoModel({
     required String id,
     required String description,
     required TodoType type,
@@ -25,6 +25,7 @@ class TodoModel extends Todo {
           endTime: endTime,
         );
 
+  @override
   TodoModel copyWith({
     String? id,
     String? description,

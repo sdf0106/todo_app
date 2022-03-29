@@ -1,8 +1,8 @@
-import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:todo_app/config/theme/text_styles.dart';
+import 'package:intl/intl.dart';
+import '../../../../config/theme/text_styles.dart';
 import '../../../../config/theme/palette.dart';
 import '../../domain/entities/todo.dart';
 import '../bloc/todos/todos_bloc.dart';
@@ -33,6 +33,7 @@ class HomeScreen extends StatelessWidget {
                 taskStatusChanged: (String message) {},
                 failure: (String message) {},
                 emptyList: () {},
+                closeReminderBox: () {},
               );
             },
             builder: (context, state) {
@@ -62,7 +63,14 @@ class HomeScreen extends StatelessWidget {
                 loaded: (List<Todo> tasks, String message) {
                   view = ListView.separated(
                     itemBuilder: (BuildContext context, int index) {
-                      return TaskContainer(
+                      final bool isNewDay = index != 0
+                          ? _isNewDay(
+                              tasks[index].startTime,
+                              tasks[index - 1].startTime,
+                            )
+                          : true;
+
+                      final task = TaskContainer(
                         time: tasks[index].startTime,
                         isDone: tasks[index].isDone,
                         isReminded: tasks[index].isReminded,
@@ -70,6 +78,30 @@ class HomeScreen extends StatelessWidget {
                         type: tasks[index].type,
                         id: tasks[index].id,
                       );
+
+                      return isNewDay
+                          ? Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 18.0),
+                                  child: Text(
+                                    DateFormat('MMM d ').format(
+                                      tasks[index].startTime,
+                                    ),
+                                    style: TextStyles.taskMakerFont.copyWith(
+                                      color: Palette.butterflyBush,
+                                      fontSize: 13.0,
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(
+                                  height: 30.0,
+                                ),
+                                task
+                              ],
+                            )
+                          : task;
                     },
                     separatorBuilder: (BuildContext context, int index) =>
                         const SizedBox(
@@ -80,6 +112,7 @@ class HomeScreen extends StatelessWidget {
                 },
                 taskAdded: (String message) {},
                 taskStatusChanged: (String message) {},
+                closeReminderBox: () {},
               );
               return view;
             },
@@ -87,5 +120,10 @@ class HomeScreen extends StatelessWidget {
         ),
       ],
     );
+  }
+
+  bool _isNewDay(DateTime comparable, DateTime comparator) {
+    if (comparable.day < comparator.day) return true;
+    return false;
   }
 }

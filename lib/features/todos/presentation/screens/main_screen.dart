@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../../../../config/theme/palette.dart';
 import '../../../../config/theme/text_styles.dart';
+import '../../domain/entities/todo.dart';
+import '../bloc/todos/todos_bloc.dart';
 import 'home_screen.dart';
 import 'task_screen.dart';
 
@@ -24,10 +27,12 @@ class _MainScreenState extends State<MainScreen> {
     HomeScreen(),
     TaskScreen(),
   ];
+
+  bool activeReminder = false;
+
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height * 0.13;
-    bool activeReminder = false;
     height = activeReminder == true
         ? height = MediaQuery.of(context).size.height * 0.29
         : height = MediaQuery.of(context).size.height * 0.13;
@@ -35,52 +40,83 @@ class _MainScreenState extends State<MainScreen> {
     double avatarPos = MediaQuery.of(context).size.width * 0.07;
 
     return SafeArea(
-      child: Scaffold(
-        appBar: appBar(context, height, avatarPos, activeReminder),
-        body: pages[index],
-        floatingActionButton: floatingActionButton(
-          context,
-          icon: Icons.add_rounded,
-          onPressed: () => showModal(context),
-        ),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-        bottomNavigationBar: BottomAppBar(
-          child: Container(
-            color: Colors.white,
-            height: 60.0,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                ClipRRect(
-                  borderRadius: const BorderRadius.all(Radius.circular(12.0)),
-                  child: MaterialButton(
-                    onPressed: () => setState(() {
-                      index = 0;
-                    }),
-                    minWidth: 40.0,
-                    child: SvgPicture.asset(
-                      'assets/images/home_i.svg',
-                      color: index == 0 ? Palette.conrflower : Palette.alto,
-                    ),
+      child: BlocBuilder<TodosBloc, TodosState>(
+        builder: (context, state) {
+          return BlocListener<TodosBloc, TodosState>(
+            listener: (context, state) {
+              state.when(
+                initial: () {},
+                loading: () {},
+                loaded: (List<Todo> tasks, String message) {},
+                taskAdded: (String message) {},
+                taskStatusChanged: (String message) {
+                  if (message == 'Reminder Status Changed') {
+                    activeReminder = true;
+                  }
+                  setState(() {});
+                },
+                failure: (String message) {},
+                emptyList: () {},
+                closeReminderBox: () {
+                  activeReminder = false;
+                  setState(() {});
+                },
+              );
+            },
+            child: Scaffold(
+              appBar: appBar(context, height, avatarPos, activeReminder),
+              body: pages[index],
+              floatingActionButton: floatingActionButton(
+                context,
+                icon: Icons.add_rounded,
+                onPressed: () => showModal(context),
+              ),
+              floatingActionButtonLocation:
+                  FloatingActionButtonLocation.centerDocked,
+              bottomNavigationBar: BottomAppBar(
+                child: Container(
+                  color: Colors.white,
+                  height: 60.0,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      ClipRRect(
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(12.0)),
+                        child: MaterialButton(
+                          onPressed: () => setState(() {
+                            index = 0;
+                          }),
+                          minWidth: 40.0,
+                          child: SvgPicture.asset(
+                            'assets/images/home_i.svg',
+                            color:
+                                index == 0 ? Palette.conrflower : Palette.alto,
+                          ),
+                        ),
+                      ),
+                      ClipRRect(
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(12.0)),
+                        child: MaterialButton(
+                          onPressed: () => setState(() {
+                            index = 1;
+                          }),
+                          minWidth: 40.0,
+                          child: SvgPicture.asset(
+                            'assets/images/task_i.svg',
+                            color:
+                                index == 1 ? Palette.conrflower : Palette.alto,
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
-                ClipRRect(
-                  borderRadius: const BorderRadius.all(Radius.circular(12.0)),
-                  child: MaterialButton(
-                    onPressed: () => setState(() {
-                      index = 1;
-                    }),
-                    minWidth: 40.0,
-                    child: SvgPicture.asset(
-                      'assets/images/task_i.svg',
-                      color: index == 1 ? Palette.conrflower : Palette.alto,
-                    ),
-                  ),
-                ),
-              ],
+              ),
             ),
-          ),
-        ),
+          );
+        },
       ),
     );
   }
@@ -205,15 +241,3 @@ class _MainScreenState extends State<MainScreen> {
     );
   }
 }
-
-
-// children: [
-//         SizedBox(height: 20.0),
-//         TaskContainer(
-//           isDone: false,
-//           isReminded: false,
-//           task: 'Go jogging with Christina',
-//           time: DateTime.now(),
-//           type: TodoType.meeting,
-//         ),
-//       ]/

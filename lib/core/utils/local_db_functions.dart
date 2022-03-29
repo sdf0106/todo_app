@@ -1,5 +1,5 @@
-import 'package:todo_app/core/utils/local_db.dart';
-import 'package:todo_app/core/utils/todo_type.dart';
+import 'local_db.dart';
+import 'todo_type.dart';
 
 import '../../features/todos/data/models/todo_model.dart';
 import '../../features/todos/domain/entities/todo.dart';

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:todo_app/core/helpers/helper_functions.dart';
+import 'package:intl/intl.dart';
+import '../../../../core/helpers/helper_functions.dart';
 import '../../../../config/theme/palette.dart';
 import '../../../../config/theme/text_styles.dart';
 import '../../../../core/utils/todo_type.dart';
@@ -78,12 +79,6 @@ class TaskContainer extends StatelessWidget {
                               onTap: () => setState(
                                 () {
                                   isDone = !isDone;
-                                  context.read<TodosBloc>().add(
-                                        TodosEvent.taskIsDone(
-                                          id: id,
-                                          status: isDone,
-                                        ),
-                                      );
                                 },
                               ),
                               child: isDone == true
@@ -97,9 +92,9 @@ class TaskContainer extends StatelessWidget {
                           },
                         ),
                         const SizedBox(width: 11),
-                        const Text(
-                          '07:00 AM',
-                          style: TextStyle(color: Palette.frenchGrey),
+                        Text(
+                          DateFormat.jm().format(time),
+                          style: const TextStyle(color: Palette.frenchGrey),
                         ),
                       ],
                     ),
@@ -118,9 +113,18 @@ class TaskContainer extends StatelessWidget {
                         StateSetter setState,
                       ) {
                         return InkWell(
-                          onTap: () => setState(
-                            () => isReminded = !isReminded,
-                          ),
+                          onTap: () {
+                            context.read<TodosBloc>().add(
+                                  TodosEvent.taskIsReminded(
+                                    id: id,
+                                    status: isReminded,
+                                  ),
+                                );
+                            context
+                                .read<TodosBloc>()
+                                .add(const TodosEvent.getAllTasks());
+                          },
+                          // ),
                           child: SvgPicture.asset(
                             'assets/images/reminder.svg',
                             color: isReminded == true

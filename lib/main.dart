@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:todo_app/config/routes/router.dart';
+import 'config/routes/router.dart';
 
 import 'injector.dart';
 import 'features/todos/presentation/bloc/todos/todos_bloc.dart';

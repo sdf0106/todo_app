@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../../../../config/theme/palette.dart';
 import '../../../../config/theme/text_styles.dart';
+import '../bloc/todos/todos_bloc.dart';
 
 class ReminderBox extends StatelessWidget {
   const ReminderBox({Key? key}) : super(key: key);
@@ -58,17 +60,20 @@ class ReminderBox extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 InkWell(
-                  onTap: () {},
+                  onTap: () {
+                    context.read<TodosBloc>().add(
+                          const TodosEvent.closeReminderBox(),
+                        );
+                    context.read<TodosBloc>().add(
+                          const TodosEvent.getAllTasks(),
+                        );
+                  },
                   child: const Icon(
                     Icons.close_rounded,
                     color: Colors.white,
                     size: 15.0,
                   ),
                 ),
-                // const SizedBox(
-                //   height: 6.0,
-                //   width: 28.0,
-                // ),
                 SvgPicture.asset('assets/images/bell.svg'),
               ],
             ),

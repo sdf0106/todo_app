@@ -12,4 +12,5 @@ class TodosEvent with _$TodosEvent {
     required String id,
     required bool status,
   }) = _TaskIsReminded;
+  const factory TodosEvent.closeReminderBox() = _CloseReminderBox;
 }

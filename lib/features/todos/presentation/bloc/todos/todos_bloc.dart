@@ -1,12 +1,9 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:dartz/dartz.dart';
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:todo_app/core/utils/constants.dart';
-import 'package:todo_app/features/todos/data/datasources/todo_local_data_source.dart';
+import '../../../data/datasources/todo_local_data_source.dart';
 import 'package:todo_app/features/todos/domain/usecases/add_todo_usecase.dart'
     as add;
 import 'package:todo_app/features/todos/domain/usecases/change_todo_done_status_usecase.dart'
@@ -14,7 +11,6 @@ import 'package:todo_app/features/todos/domain/usecases/change_todo_done_status_
 import 'package:todo_app/features/todos/domain/usecases/change_todo_reminder_status_usecase.dart'
     as changeRemindStatus;
 
-import '../../../../../core/errors/failures.dart';
 import '../../../../../core/usecases/usecase.dart';
 import '../../../domain/entities/todo.dart';
 import '../../../domain/usecases/get_todos_usecase.dart';
@@ -43,6 +39,11 @@ class TodosBloc extends Bloc<TodosEvent, TodosState> {
     on<_GetAllTasks>(_getTasks);
     on<_TaskIsDone>(_changeDoneStatus);
     on<_TaskIsReminded>(_changeReminderStatus);
+    on<_CloseReminderBox>(
+      (event, emit) => emit(
+        const TodosState.closeReminderBox(),
+      ),
+    );
   }
 
   void _getTasks(event, emit) async {
@@ -52,7 +53,7 @@ class TodosBloc extends Bloc<TodosEvent, TodosState> {
       // final fT = _eitherTasksOrFailure(failureOrTasks);
       // final data = await dataSource.getTodos();
       emit(
-        TodosState.loaded(tasks: failureOrTasks , message: 'Tasks Loaded'),
+        TodosState.loaded(tasks: failureOrTasks, message: 'Tasks Loaded'),
       );
     } catch (e) {
       emit(const TodosState.emptyList());
@@ -91,7 +92,8 @@ class TodosBloc extends Bloc<TodosEvent, TodosState> {
         status: event.status,
       ),
     );
-    emit(const TodosState.taskStatusChanged(message: 'Done Status Changed'));
+    emit(
+        const TodosState.taskStatusChanged(message: 'Reminder Status Changed'));
   }
 
   // TodosState _eitherTasksOrFailure(

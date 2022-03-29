@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:todo_app/core/helpers/helper_functions.dart';
+import '../../../../core/helpers/helper_functions.dart';
 
 import '../../../../config/theme/text_styles.dart';
 import '../../../../core/utils/todo_type.dart';

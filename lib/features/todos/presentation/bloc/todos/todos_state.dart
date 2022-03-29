@@ -13,4 +13,5 @@ class TodosState with _$TodosState {
       TaskStatusChanged;
   const factory TodosState.failure(String error) = Failure;
   const factory TodosState.emptyList() = EmptyList;
+  const factory TodosState.closeReminderBox() = CloseReminderBox;
 }

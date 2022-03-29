@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 
-import 'package:todo_app/core/helpers/helper_functions.dart';
-import 'package:todo_app/features/todos/presentation/bloc/todos/todos_bloc.dart';
-import 'package:todo_app/features/todos/presentation/widgets/rounded_button.dart';
+import '../../../../core/helpers/helper_functions.dart';
+import '../bloc/todos/todos_bloc.dart';
+import 'rounded_button.dart';
 
 import '../../../../config/theme/palette.dart';
 import '../../../../config/theme/text_styles.dart';
@@ -195,7 +195,6 @@ class _ShowModalContentState extends State<ShowModalContent> {
                         ),
                       );
                   Navigator.pop(context);
-                  // context.read<TodosBloc>().add(const TodosEvent.getAllTasks());
                 },
               ),
             ],
@@ -253,8 +252,8 @@ class _ShowModalContentState extends State<ShowModalContent> {
   }
 
   Future pickDateTime(BuildContext context) async {
-    var dateRange = await pickDateRange(context);
-    if (dateRange == null) return;
+    var dateRange = await pickDateRange(context) as DateTimeRange;
+    // if (dateRange == null) return;
 
     final startingTime = await pickTime(context);
     if (startingTime == null) return;
@@ -264,7 +263,9 @@ class _ShowModalContentState extends State<ShowModalContent> {
 
     setState(
       () => _startingDateTime = DateTime(
-        dateRange.start as int,
+        dateRange.start.year,
+        dateRange.start.month,
+        dateRange.start.day,
         startingTime.hour,
         startingTime.minute,
       ),
@@ -272,7 +273,9 @@ class _ShowModalContentState extends State<ShowModalContent> {
 
     setState(
       () => _endingDateTime = DateTime(
-        dateRange.end,
+        dateRange.end.year,
+        dateRange.end.month,
+        dateRange.end.day,
         endingTime.hour,
         endingTime.minute,
       ),

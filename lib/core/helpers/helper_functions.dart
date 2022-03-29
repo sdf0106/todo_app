@@ -1,4 +1,5 @@
 import 'package:flutter/painting.dart';
+
 import '../../config/theme/palette.dart';
 import '../utils/todo_type.dart';
 
