@@ -22,7 +22,7 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
   int index = 0;
-
+  int numbOfTasks = 1;
   List pages = const [
     HomeScreen(),
     TaskScreen(),
@@ -47,7 +47,10 @@ class _MainScreenState extends State<MainScreen> {
               state.when(
                 initial: () {},
                 loading: () {},
-                loaded: (List<Todo> tasks, String message) {},
+                loaded: (List<Todo> tasks, String message) {
+                  numbOfTasks = tasks.length;
+                  setState(() {});
+                },
                 taskAdded: (String message) {},
                 taskStatusChanged: (String message) {
                   if (message == 'Reminder Status Changed') {
@@ -64,7 +67,13 @@ class _MainScreenState extends State<MainScreen> {
               );
             },
             child: Scaffold(
-              appBar: appBar(context, height, avatarPos, activeReminder),
+              appBar: appBar(
+                context,
+                height,
+                avatarPos,
+                activeReminder,
+                numbOfTasks,
+              ),
               body: pages[index],
               floatingActionButton: floatingActionButton(
                 context,
@@ -121,8 +130,13 @@ class _MainScreenState extends State<MainScreen> {
     );
   }
 
-  PreferredSize appBar(BuildContext context, double height, double avatarPos,
-      bool activeReminder) {
+  PreferredSize appBar(
+    BuildContext context,
+    double height,
+    double avatarPos,
+    bool activeReminder,
+    int numberOfTasks,
+  ) {
     return PreferredSize(
       preferredSize: Size.fromHeight(height),
       child: AppBar(
@@ -174,7 +188,7 @@ class _MainScreenState extends State<MainScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      'Hello Brenda!\nToday you have   tasks',
+                      'Hello Brenda!\nYou have $numberOfTasks tasks',
                       style: TextStyles.numberOfTasksFont,
                     ),
                     Container(

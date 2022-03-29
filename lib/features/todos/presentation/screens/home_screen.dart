@@ -62,6 +62,7 @@ class HomeScreen extends StatelessWidget {
                 failure: (String error) {},
                 loaded: (List<Todo> tasks, String message) {
                   view = ListView.separated(
+                    physics: const BouncingScrollPhysics(),
                     itemBuilder: (BuildContext context, int index) {
                       final bool isNewDay = index != 0
                           ? _isNewDay(

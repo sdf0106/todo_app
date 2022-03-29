@@ -21,8 +21,8 @@ class TypeContainer extends StatelessWidget {
           ? const EdgeInsets.only(right: 9.0, bottom: 22.0)
           : const EdgeInsets.only(left: 9.0, bottom: 22.0),
       child: Container(
-        width: 159.0,
-        height: 180.0,
+        width: MediaQuery.of(context).size.width * 0.424,
+        height: MediaQuery.of(context).size.height * 0.22,
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(5.0),

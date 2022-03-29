@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../config/theme/palette.dart';
@@ -22,9 +23,7 @@ class OnboardingScreen extends StatelessWidget {
               
               ,
             ),
-            const Image(
-              image: AssetImage('assets/images/note.jpg'),
-            ),
+            SvgPicture.asset('assets/images/onboarding.svg'),
             SizedBox(
               height: MediaQuery.of(context).size.height * 0.14,
             ),
