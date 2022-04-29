@@ -40,92 +40,84 @@ class _MainScreenState extends State<MainScreen> {
     double avatarPos = MediaQuery.of(context).size.width * 0.07;
 
     return SafeArea(
-      child: BlocBuilder<TodosBloc, TodosState>(
-        builder: (context, state) {
-          return BlocListener<TodosBloc, TodosState>(
-            listener: (context, state) {
-              state.when(
-                initial: () {},
-                loading: () {},
-                loaded: (List<Todo> tasks, String message) {
-                  numbOfTasks = tasks.length;
-                  setState(() {});
-                },
-                taskAdded: (String message) {},
-                taskStatusChanged: (String message) {
-                  if (message == 'Reminder Status Changed') {
-                    activeReminder = true;
-                  }
-                  setState(() {});
-                },
-                failure: (String message) {},
-                emptyList: () {},
-                closeReminderBox: () {
-                  activeReminder = false;
-                  setState(() {});
-                },
-              );
+      child: BlocListener<TodosBloc, TodosState>(
+        listener: (context, state) {
+          state.when(
+            initial: () {},
+            loading: () {},
+            loaded: (List<Todo> tasks, String message) {
+              numbOfTasks = tasks.length;
+              setState(() {});
             },
-            child: Scaffold(
-              appBar: appBar(
-                context,
-                height,
-                avatarPos,
-                activeReminder,
-                numbOfTasks,
-              ),
-              body: pages[index],
-              floatingActionButton: floatingActionButton(
-                context,
-                icon: Icons.add_rounded,
-                onPressed: () => showModal(context),
-              ),
-              floatingActionButtonLocation:
-                  FloatingActionButtonLocation.centerDocked,
-              bottomNavigationBar: BottomAppBar(
-                child: Container(
-                  color: Colors.white,
-                  height: 60.0,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      ClipRRect(
-                        borderRadius:
-                            const BorderRadius.all(Radius.circular(12.0)),
-                        child: MaterialButton(
-                          onPressed: () => setState(() {
-                            index = 0;
-                          }),
-                          minWidth: 40.0,
-                          child: SvgPicture.asset(
-                            'assets/images/home_i.svg',
-                            color:
-                                index == 0 ? Palette.conrflower : Palette.alto,
-                          ),
-                        ),
-                      ),
-                      ClipRRect(
-                        borderRadius:
-                            const BorderRadius.all(Radius.circular(12.0)),
-                        child: MaterialButton(
-                          onPressed: () => setState(() {
-                            index = 1;
-                          }),
-                          minWidth: 40.0,
-                          child: SvgPicture.asset(
-                            'assets/images/task_i.svg',
-                            color:
-                                index == 1 ? Palette.conrflower : Palette.alto,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
+            taskAdded: (String message) {},
+            taskStatusChanged: (String message) {
+              if (message == 'Reminder Status Changed') {
+                activeReminder = true;
+              }
+              setState(() {});
+            },
+            failure: (String message) {},
+            emptyList: () {},
+            closeReminderBox: () {
+              activeReminder = false;
+              setState(() {});
+            },
           );
         },
+        child: Scaffold(
+          appBar: appBar(
+            context,
+            height,
+            avatarPos,
+            activeReminder,
+            numbOfTasks,
+          ),
+          body: pages[index],
+          floatingActionButton: floatingActionButton(
+            context,
+            icon: Icons.add_rounded,
+            onPressed: () => showModal(context),
+          ),
+          floatingActionButtonLocation:
+              FloatingActionButtonLocation.centerDocked,
+          bottomNavigationBar: BottomAppBar(
+            child: Container(
+              color: Colors.white,
+              height: 60.0,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  ClipRRect(
+                    borderRadius: const BorderRadius.all(Radius.circular(12.0)),
+                    child: MaterialButton(
+                      onPressed: () => setState(() {
+                        index = 0;
+                      }),
+                      minWidth: 40.0,
+                      child: SvgPicture.asset(
+                        'assets/images/home_i.svg',
+                        color: index == 0 ? Palette.conrflower : Palette.alto,
+                      ),
+                    ),
+                  ),
+                  ClipRRect(
+                    borderRadius: const BorderRadius.all(Radius.circular(12.0)),
+                    child: MaterialButton(
+                      onPressed: () => setState(() {
+                        index = 1;
+                      }),
+                      minWidth: 40.0,
+                      child: SvgPicture.asset(
+                        'assets/images/task_i.svg',
+                        color: index == 1 ? Palette.conrflower : Palette.alto,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
       ),
     );
   }
