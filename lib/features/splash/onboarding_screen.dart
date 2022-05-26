@@ -20,9 +20,7 @@ class OnboardingScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             SizedBox(
-              height: MediaQuery.of(context).size.height * 0.22
-              
-              ,
+              height: MediaQuery.of(context).size.height * 0.22,
             ),
             SvgPicture.asset('assets/images/onboarding.svg'),
             SizedBox(
@@ -55,4 +53,3 @@ class OnboardingScreen extends StatelessWidget {
     );
   }
 }
-

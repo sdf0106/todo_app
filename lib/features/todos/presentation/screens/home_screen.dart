@@ -10,7 +10,14 @@ import '../widgets/task_container.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
-  
+
+  bool _isNewDay(DateTime comparable, DateTime comparator) {
+    if (comparable.day < comparator.day || comparable.day > comparator.day) {
+      return true;
+    }
+    return false;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -19,27 +26,21 @@ class HomeScreen extends StatelessWidget {
         Expanded(
           child: BlocConsumer<TodosBloc, TodosState>(
             listener: (context, state) {
-              state.when(
-                initial: () {},
-                loading: () {},
+              state.maybeWhen(
                 loaded: (List<Todo> tasks, String message) {},
                 taskAdded: (String message) {
                   if (message == 'Task Added') {
-                    context
-                        .read<TodosBloc>()
-                        .add(const TodosEvent.getAllTasks());
+                    context.read<TodosBloc>().add(
+                          const TodosEvent.getAllTasks(),
+                        );
                   }
                 },
-                taskStatusChanged: (String message) {},
-                failure: (String message) {},
-                emptyList: () {},
-                closeReminderBox: () {},
+                orElse: () {},
               );
             },
             builder: (context, state) {
               Widget view = Container();
-              state.when(
-                initial: () {},
+              state.maybeWhen(
                 loading: () => view = const CircularProgressIndicator(
                   color: Palette.malibu,
                 ),
@@ -59,7 +60,6 @@ class HomeScreen extends StatelessWidget {
                     ),
                   );
                 },
-                failure: (String error) {},
                 loaded: (List<Todo> tasks, String message) {
                   view = ListView.separated(
                     physics: const BouncingScrollPhysics(),
@@ -111,9 +111,7 @@ class HomeScreen extends StatelessWidget {
                     itemCount: tasks.length,
                   );
                 },
-                taskAdded: (String message) {},
-                taskStatusChanged: (String message) {},
-                closeReminderBox: () {},
+                orElse: () {},
               );
               return view;
             },
@@ -121,11 +119,5 @@ class HomeScreen extends StatelessWidget {
         ),
       ],
     );
-  }
-
-  bool _isNewDay(DateTime comparable, DateTime comparator) {
-    if (comparable.day < comparator.day || comparable.day > comparator.day)
-      return true;
-    return false;
   }
 }

@@ -76,11 +76,7 @@ class TaskContainer extends StatelessWidget {
                             StateSetter setState,
                           ) {
                             return InkWell(
-                              onTap: () => setState(
-                                () {
-                                  isDone = !isDone;
-                                },
-                              ),
+                              onTap: () => setState(() => isDone = !isDone),
                               child: isDone == true
                                   ? SvgPicture.asset(
                                       'assets/images/checked.svg',
@@ -120,11 +116,13 @@ class TaskContainer extends StatelessWidget {
                                     status: isReminded,
                                   ),
                                 );
-                            context
-                                .read<TodosBloc>()
-                                .add(const TodosEvent.getAllTasks());
+                            context.read<TodosBloc>().add(
+                                  const TodosEvent.getAllTasks(),
+                                );
+                            setState(
+                              (() => isReminded = !isReminded),
+                            );
                           },
-                          // ),
                           child: SvgPicture.asset(
                             'assets/images/reminder.svg',
                             color: isReminded == true
