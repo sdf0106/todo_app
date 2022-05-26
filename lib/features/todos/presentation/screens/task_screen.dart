@@ -23,7 +23,15 @@ class TaskScreen extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 30.0),
-            Wrap(
+            GridView(
+              gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                maxCrossAxisExtent: 200,
+                childAspectRatio: 4 / 5,
+                crossAxisSpacing: 16,
+                mainAxisSpacing: 16,
+              ),
+              shrinkWrap: true,
+              physics: const BouncingScrollPhysics(),
               children: [
                 for (var i in TodoType.values)
                   TypeContainer(

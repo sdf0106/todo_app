@@ -17,7 +17,7 @@ class TodosRepositoryImpl implements TodosRepository {
   Future<List<Todo>> getTodos() async {
     return await _getTodos();
   }
-
+    
   @override
   Future<void> addTodo({required Todo todo}) async {
     return dataSource.addTodo(todo: TodoModel.returnObj(todo));

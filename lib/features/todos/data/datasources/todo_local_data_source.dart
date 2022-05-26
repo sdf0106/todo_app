@@ -70,7 +70,7 @@ class TodoLocalDataSourceImpl implements TodoLocalDataSource {
   }) async {
     try {
       int index = db.dataBase.indexWhere((element) => element.id == id);
-      db.dataBase[index].isReminded = !db.dataBase[index].isReminded;
+      db.dataBase[index].copyWith(isReminded: !db.dataBase[index].isReminded);
     } catch (error) {
       throw CacheExeption();
     }

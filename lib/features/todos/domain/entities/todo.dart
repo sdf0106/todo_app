@@ -6,11 +6,11 @@ class Todo extends Equatable {
   final String id;
   final String description;
   final TodoType type;
-  bool isDone;
-  bool isReminded;
+  final bool isDone;
+  final bool isReminded;
   final DateTime startTime;
   final DateTime endTime;
-  Todo({
+  const Todo({
     required this.type,
     required this.id,
     required this.description,
