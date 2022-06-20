@@ -42,26 +42,22 @@ class _MainScreenState extends State<MainScreen> {
     return SafeArea(
       child: BlocListener<TodosBloc, TodosState>(
         listener: (context, state) {
-          state.when(
-            initial: () {},
-            loading: () {},
+          state.maybeWhen(
             loaded: (List<Todo> tasks, String message) {
               numbOfTasks = tasks.length;
               setState(() {});
             },
-            taskAdded: (String message) {},
             taskStatusChanged: (String message) {
               if (message == 'Reminder Status Changed') {
                 activeReminder = true;
               }
               setState(() {});
             },
-            failure: (String message) {},
-            emptyList: () {},
             closeReminderBox: () {
               activeReminder = false;
               setState(() {});
             },
+            orElse: () {},
           );
         },
         child: Scaffold(

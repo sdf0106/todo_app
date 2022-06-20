@@ -20,7 +20,7 @@ class TodosApp extends StatelessWidget {
   Widget build(BuildContext context) {
     final AppRouter _router = AppRouter();
     return BlocProvider(
-      create: (_) => sl<TodosBloc>(),
+      create: (_) => sl<TodosBloc>()..add(const TodosEvent.getAllTasks()),
       child: MaterialApp.router(
         debugShowCheckedModeBanner: false,
         routeInformationParser: _router.router.routeInformationParser,

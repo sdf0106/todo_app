@@ -1,4 +1,4 @@
-import 'dart:async';
+// ignore_for_file: invalid_use_of_visible_for_testing_member
 
 import 'package:bloc/bloc.dart';
 import 'package:flutter/foundation.dart';
@@ -35,23 +35,49 @@ class TodosBloc extends Bloc<TodosEvent, TodosState> {
     required this.changeTodoReminderStatusUseCase,
     required this.dataSource,
   }) : super(const _Initial()) {
-    on<_AddTask>(_addTask);
-    on<_GetAllTasks>(_getTasks);
-    on<_TaskIsDone>(_changeDoneStatus);
-    on<_TaskIsReminded>(_changeReminderStatus);
-    on<_CloseReminderBox>(
-      (event, emit) => emit(
+    on<TodosEvent>(todosEvent);
+  }
+
+  void todosEvent(
+    TodosEvent event,
+    Emitter<TodosState> emit,
+  ) async {
+    event.when(
+      getAllTasks: () async {
+        try {
+          emit(const TodosState.loading());
+          final failureOrTasks = await getTodos(NoParams());
+          emit(
+            TodosState.loaded(tasks: failureOrTasks, message: 'Tasks Loaded'),
+          );
+        } catch (e) {
+          emit(const TodosState.emptyList());
+        }
+      },
+      addTask: (todo) => _addTask(todo),
+      taskIsDone: (String id, bool isDone) => _changeDoneStatus(id, isDone),
+      taskIsReminded: (String id, bool isReminded) =>
+          _changeReminderStatus(id, isReminded),
+      closeReminderBox: () => emit(
         const TodosState.closeReminderBox(),
       ),
     );
+
+    // event.map(
+    //   addTask: (event) {
+    //     emit();
+    //   },
+    //   getAllTasks: (event) {},
+    //   taskIsDone: (event) {},
+    //   taskIsReminded: (event) {},
+    //   closeReminderBox: (event) {},
+    // );
   }
 
-  void _getTasks(event, emit) async {
+  void _getTasks() async {
     try {
       emit(const TodosState.loading());
       final failureOrTasks = await getTodos(NoParams());
-      // final fT = _eitherTasksOrFailure(failureOrTasks);
-      // final data = await dataSource.getTodos();
       emit(
         TodosState.loaded(tasks: failureOrTasks, message: 'Tasks Loaded'),
       );
@@ -60,36 +86,32 @@ class TodosBloc extends Bloc<TodosEvent, TodosState> {
     }
   }
 
-  FutureOr<void> _addTask(_AddTask event, Emitter<TodosState> emit) async {
+  void _addTask(Todo todo) async {
     emit(const TodosState.loading());
-    await addTodoUseCase.call(add.Params(todo: event.todo));
+    await addTodoUseCase.call(add.Params(todo: todo));
     emit(const TodosState.taskAdded(message: 'Task Added'));
-    // final fA = await _eitherAddOrFailure(failureOrAdded);
   }
 
-  FutureOr<void> _changeDoneStatus(
-    _TaskIsDone event,
-    Emitter<TodosState> emit,
-  ) async {
+  void _changeDoneStatus(String id, bool status) async {
     emit(const TodosState.loading());
     await changeTodoDoneStatusUseCase.call(
       changeDoneStatus.Params(
-        id: event.id,
-        status: event.status,
+        id: id,
+        status: status,
       ),
     );
     emit(const TodosState.taskStatusChanged(message: 'Done Status Changed'));
   }
 
-  FutureOr<void> _changeReminderStatus(
-    _TaskIsReminded event,
-    Emitter<TodosState> emit,
+  void _changeReminderStatus(
+    String id,
+    bool status,
   ) async {
     emit(const TodosState.loading());
     await changeTodoReminderStatusUseCase.call(
       changeRemindStatus.Params(
-        id: event.id,
-        status: event.status,
+        id: id,
+        status: status,
       ),
     );
     emit(
